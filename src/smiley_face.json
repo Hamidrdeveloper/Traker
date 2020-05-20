@@ -1,0 +1,51 @@
+{
+    "features": [
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -5.5,
+                    -5.5
+                ]
+            },
+            "properties": {
+                "bear": 70,
+                "IMEI": "867965023074335",
+                "isMobile": "0"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -70.5,
+                    -70.5
+                ]
+            },
+            "properties": {
+                "bear": 70,
+                "IMEI": "867965023074335",
+                "isMobile": "0"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -7.5,
+                    5.5
+                ]
+            },
+            "properties": {
+                "bear": 70,
+                "IMEI": "867965023074335",
+                "isMobile": "0"
+            }
+        }
+     
+    ],
+    "type": "FeatureCollection"
+}
