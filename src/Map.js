@@ -21,6 +21,7 @@ import gps from './assets/Image/gps.png';
 import signs from './assets/Image/signs.png';
 import MapboxGL from '@react-native-mapbox-gl/maps';
 import line from './assets/Image/dirction.png';
+import search from './assets/Image/search.png';
 import closePop from './assets/Image/signsha.png';
 import LinearGradient from 'react-native-linear-gradient';
 import down from './assets/Image/down_arrow.png';
@@ -37,6 +38,8 @@ export const IS_ANDROID = Platform.OS === 'android';
 
 import {Card} from 'react-native-elements';
 import smileyFaceGeoJSON from './smiley_face.json';
+import LayerMapLeft from './LayerMapLeft';
+import SearchLayer from './SearchLayer';
 
 const layerStyles = {
   background: {
@@ -461,10 +464,11 @@ class ShowMap extends React.Component {
                 iconOptional: true,
                 visibility: this.state.routeFillMapFull,
                 textField: '{point_count_abbreviated}',
-                textColor: '#fff',
+                textColor: '#000',
                 textFont: ['DIN Offc Pro Medium', 'Arial Unicode MS Bold'],
-                textSize: 12,
-              }}
+                textSize: 15,
+                
+               }}
             />
           </MapboxGL.ShapeSource>
           <MapboxGL.ShapeSource id="routeSource" shape={this.state.line_sample}>
@@ -487,14 +491,15 @@ class ShowMap extends React.Component {
             alignItems: 'flex-end',
           }}>
           <View style={styles.right}>
-            <DrawLayer action={this.onLayer} />
-            <Organization dataOrg={this.state.dataOrg} dataPro={this.getMark} />
-          </View>
-
-          <View style={styles.left}>
-            <TouchableOpacity onPress={() => this.onShowLineCar()}>
-              <LayerMap
-                style={styles.home}
+            <DrawLayer action={this.onLayer} style={{opacity: -1}} />
+            <TouchableOpacity
+              style={{
+                opacity: 2,
+                width: 100,
+                height: 85,
+              }}
+              onPress={() => this.onShowLineCar()}>
+              <LayerMapLeft
                 image={line}
                 styleImageIn={{width: 20, height: 20}}
                 styleImage={
@@ -504,7 +509,16 @@ class ShowMap extends React.Component {
                 }
               />
             </TouchableOpacity>
+            <Organization dataOrg={this.state.dataOrg} dataPro={this.getMark} />
+          </View>
+
+          <View style={styles.left}>
+            
             <TouchableOpacity
+              style={{
+                width: 80,
+                height: 85,
+              }}
               activeOpacity={0.1}
               onPress={() => this.onToggleUserLocation()}>
               <LayerMap
@@ -527,6 +541,9 @@ class ShowMap extends React.Component {
                 styleImageIn={{width: 20, height: 20}}
               />
             </TouchableOpacity>
+            <View style={{position: 'absolute',height:85*3-10}}>
+              <SearchLayer action={this.onLayer} style={{opacity: -1}} />
+            </View>
           </View>
           <Modal
             visible={modalVisible}

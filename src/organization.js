@@ -1,3 +1,4 @@
+/* eslint-disable react-native/no-inline-styles */
 import React from 'react';
 import {
   SafeAreaView,
@@ -20,6 +21,7 @@ import PropTypes from 'prop-types';
 
 import ORG from './assets/Image/menu.png';
 import mapAction from './action/mapAction';
+import Icon from 'react-native-vector-icons/FontAwesome';
 const {UIManager} = NativeModules;
 
 UIManager.setLayoutAnimationEnabledExperimental &&
@@ -86,7 +88,7 @@ export default class Organization extends React.Component {
     if (this.state.viewState == true) {
       LayoutAnimation.linear();
       this.setState({
-        w: this.state.w + 80,
+        w: this.state.w + 95,
         h: this.state.h + 300,
 
         borderTopRightRadius: this.state.h / 10,
@@ -96,7 +98,7 @@ export default class Organization extends React.Component {
     } else {
       LayoutAnimation.linear();
       this.setState({
-        w: this.state.w - 80,
+        w: this.state.w - 95,
         h: this.state.h - 300,
         pRight: 10,
       });
@@ -114,26 +116,51 @@ export default class Organization extends React.Component {
   renderItem(item) {
     let {dataPro} = this.props;
     console.log('ItemOrg', item);
+    var title = item.text;
+    var titleSub = title.substring(0, 19);
 
     return (
-      <TouchableOpacity
-        onPress={() => {
-          dataPro(item.orgId);
-          LayoutAnimation.linear();
-          this.setState({
-            w: this.state.w - 80,
-            h: this.state.h - 300,
-            pRight: 10,
-          });
-          this.setState({
-            viewStateAnim: !this.state.viewStateAnim,
-            viewState: !this.state.viewState,
-          });
-        }}>
-        <View style={{marginTop: 5}}>
-          <Text style={{fontSize: 12}}>{item.text}</Text>
+      <View>
+        <View
+          style={{
+            marginTop: 10,
+            flexDirection: 'row',
+            alignItems: 'flex-end',
+            justifyContent: 'flex-end',
+          }}>
+          <View style={{width: 10}} />
+          <TouchableOpacity
+            onPress={() => {
+              dataPro(item.orgId);
+              LayoutAnimation.linear();
+              this.setState({
+                w: this.state.w - 95,
+                h: this.state.h - 300,
+                pRight: 10,
+              });
+              this.setState({
+                viewStateAnim: !this.state.viewStateAnim,
+                viewState: !this.state.viewState,
+              });
+            }}>
+            <Text style={{fontSize: 15}}>{titleSub + '...'}</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={{
+              width: 80,
+              height: 35,
+              position: 'absolute',
+              left: 0,
+              paddingLeft:8,
+              justifyContent: 'flex-end',
+            }}
+            onPress={() => {
+              alert('hi');
+            }}>
+            <Icon name="chevron-down" size={14} />
+          </TouchableOpacity>
         </View>
-      </TouchableOpacity>
+      </View>
     );
   }
 
